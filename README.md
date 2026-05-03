@@ -18,7 +18,7 @@
 2. [Tools Used](#Tools-Used)
 3. [Lab Environment & Toolchain Philosophy](#lab-environment--toolchain-philosophy)
 4. [What This Repository Covers](#What-This-Repository-Covers)
-5. [File Index](#file-index)
+5. [File Index](#Module-1---Introduction-to-Verilog-RTL-Design-and-Synthesis)
 6. [2:1 Multiplexer (`good_mux`)](#lab-1--21-multiplexer-good_mux)
 7. [Multiple Modules: Hierarchy vs Flatten vs Submodule](#lab-2--multiple-modules-hierarchy-vs-flatten-vs-submodule)
 8. [D Flip-Flops (Three Reset/Set Variants)](#lab-3--d-flip-flops-three-resetset-variants)
@@ -117,32 +117,32 @@ Using a real PDK means the synthesized netlist reflects actual silicon area and 
 
 ---
 
-## File Index
+## Module 1 - Introduction to Verilog RTL Design and Synthesis
 
-### Design Source Files
+### Theory
 
-| File | Module Name | Type | Function |
-|------|-------------|------|----------|
-| `good_mux.v` | `good_mux` | Combinational | 2:1 Multiplexer - selects between `i0` and `i1` based on `sel` |
-| `multiple_modules.v` | `multiple_modules`, `sub_module1`, `sub_module2` | Combinational Hierarchy | Top-level module instantiating an AND gate and an OR gate as sub-modules |
-| `dff_asyncres.v` | `dff_asyncres` | Sequential | D Flip-Flop with **asynchronous reset** (active-high, resets to 0) |
-| `dff_async_set.v` | `dff_async_set` | Sequential | D Flip-Flop with **asynchronous set** (active-high, sets to 1) |
-| `dff_syncres.v` | `dff_syncres` | Sequential | D Flip-Flop with **synchronous reset** (clocked, resets to 0) |
-| `mult_2.v` | `mul2` | Combinational/Arithmetic | Multiplies a 3-bit input by 2 - synthesizes with zero logic cells |
-| `mult_8.v` | `mult8` | Combinational/Arithmetic | Multiplies a 3-bit input by 9 - synthesizes with zero logic cells |
-
-### Testbench Files
-
-| File | Tests Module | Simulation Duration | Key Stimulus |
-|------|-------------|---------------------|--------------|
-| `tb_good_mux.v` | `good_mux` | 300 ns | `sel` toggles every 75 ns, `i0` every 10 ns, `i1` every 55 ns |
-| `tb_multiple_modules.v` | `multiple_modules` | 300 ns | `a` every 10 ns, `b` every 55 ns, `c` every 75 ns |
-| `tb_dff_asyncres.v` | `dff_asyncres` | 3000 ns | Clock 20 ns period, `d` every 23 ns, `async_reset` every 547 ns |
-| `tb_dff_async_set.v` | `dff_async_set` | 3000 ns | Clock 20 ns period, `d` every 23 ns, `async_set` every 547 ns |
-| `tb_dff_syncres.v` | `dff_syncres` | 3000 ns | Clock 20 ns period, `d` every 23 ns, `sync_reset` every 113 ns |
+**RTL (Register Transfer Level)**  
+RTL is a crucial abstraction in digital design using hardware description languages like Verilog to define how data moves between registers and is processed through combinational logic.
 
 ---
 
+**Simulation**  
+Simulation is the process of using software tools to verify that a design written in HDL (such as Verilog) behaves correctly before fabrication. It models the logic and timing of circuits, allowing engineers to validate functionality and fix errors early, saving significant cost and time compared to physical prototyping.
+
+---
+
+**Synthesis**  
+Synthesis is the automated process of converting high-level behavioral code (RTL written in Verilog/VHDL) into an optimized gate-level netlist mapped to a specific technology library.
+
+### Implementation
+
+#### Module 1 Tasks:-
+
+1. Simulate Verilog RTL using Icarus Verilog  
+2. Generate waveform using GTKWave  
+3. Perform synthesis using Yosys and generate netlist  
+
+---
 ## 2:1 Multiplexer (`good_mux`)
 
 ### 1.1 RTL Description
