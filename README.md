@@ -18,7 +18,7 @@
 2. [Tools Used](#Tools-Used)
 3. [Lab Environment & Toolchain Philosophy](#lab-environment--toolchain-philosophy)
 4. [What This Repository Covers](#What-This-Repository-Covers)
-5. [File Index](#Module-1---Introduction-to-Verilog-RTL-Design-and-Synthesis)
+5. [Module 1 - Introduction to Verilog RTL Design and Synthesis](#Module-1---Introduction-to-Verilog-RTL-Design-and-Synthesis)
 6. [2:1 Multiplexer (`good_mux`)](#lab-1--21-multiplexer-good_mux)
 7. [Multiple Modules: Hierarchy vs Flatten vs Submodule](#lab-2--multiple-modules-hierarchy-vs-flatten-vs-submodule)
 8. [D Flip-Flops (Three Reset/Set Variants)](#lab-3--d-flip-flops-three-resetset-variants)
