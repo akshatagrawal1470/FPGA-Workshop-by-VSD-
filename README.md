@@ -20,11 +20,13 @@
 4. [What This Repository Covers](#What-This-Repository-Covers)
 5. [Module 1 - Introduction to Verilog RTL Design and Synthesis](#Module-1---Introduction-to-Verilog-RTL-Design-and-Synthesis)
 6. [2:1 Multiplexer (`good_mux`)](#lab-1--21-multiplexer-good_mux)
-7. [Multiple Modules: Hierarchy vs Flatten vs Submodule](#lab-2--multiple-modules-hierarchy-vs-flatten-vs-submodule)
-8. [D Flip-Flops (Three Reset/Set Variants)](#lab-3--d-flip-flops-three-resetset-variants)
-9. [Special Case Arithmetic: Multiply by 2 and Multiply by 9](#lab-4--special-case-arithmetic-multiply-by-2-and-multiply-by-9)
-10. [Key Learnings & Observations](#key-learnings--observations)
-11. [Synthesis vs. Simulation - A Deep Comparison](#synthesis-vs-simulation--a-deep-comparison)
+7. [Module 2 - Timing libs, hierarchical vs flat synthesis and efficient flop coding styles](#Module-2---Timing-libs-hierarchical-vs-flat-synthesis-and-efficient-flop-coding-styles)
+
+8. [Multiple Modules: Hierarchy vs Flatten vs Submodule](#lab-2--multiple-modules-hierarchy-vs-flatten-vs-submodule)
+9. [D Flip-Flops (Three Reset/Set Variants)](#lab-3--d-flip-flops-three-resetset-variants)
+10. [Special Case Arithmetic: Multiply by 2 and Multiply by 9](#lab-4--special-case-arithmetic-multiply-by-2-and-multiply-by-9)
+11. [Key Learnings & Observations](#key-learnings--observations)
+12. [Synthesis vs. Simulation - A Deep Comparison](#synthesis-vs-simulation--a-deep-comparison)
 
 ---
 
@@ -236,7 +238,26 @@ As a result, we can be sure that the `always @(*) if-else` block was interpreted
 As we zoom into the figure, we will see how the zero propagation delay works in the boundary when there is a change in `sel`. Right at the instant that `sel` changes from 0 to 1, there is a switch in the output signal `y`, from `i0` to `i1`. This is proof that the entire sensitivity list (`@(*)`) works perfectly fine; otherwise, there would be a delay in `y`. Hence we can say we got the same waveform as the previous.
 
 ---
+## Module 2 - Timing libs, hierarchical vs flat synthesis and efficient flop coding styles
 
+### Theory
+
+**Timing Libraries (.lib)**  
+A timing library (`.lib`) contains information about standard cells such as delay, power, and area. It is used by synthesis tools to map RTL to actual hardware gates.
+
+Each library represents a specific condition:
+- Process (P)
+- Voltage (V)
+- Temperature (T)
+
+Example: sky130_fd_sc_hd__tt_025C_1v80.lib
+
+
+- `tt` → Typical process  
+- `025C` → Temperature  
+- `1v80` → Voltage  
+
+---
 ## Multiple Modules: Hierarchy vs Flatten vs Submodule
 
 This lab is the most conceptually important in the workshop. It demonstrates three distinct synthesis strategies for the same design and shows how each strategy affects the resulting netlist and schematic. Understanding the difference between **hierarchical**, **flattened**, and **submodule-only** synthesis is a critical skill for any RTL engineer.
