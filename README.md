@@ -181,17 +181,13 @@ Test Bench generates all three inputs with different frequencies. This results i
 
 ### 1.2 Simulation
 
-**Terminal Output:**
-
-![Terminal - good_mux simulation](./results/Good_mux_te.png)
-
 The terminal confirms the two-step simulation workflow:
 1. `iverilog -o good_mux_sim good_mux.v tb_good_mux.v` - Icarus Verilog compiles both files into an executable. No errors or warnings indicates the RTL is syntactically and semantically correct.
 2. `./good_mux_sim` (or `vvp good_mux_sim`) - Executes the simulation, runs for 300 ns (`#300 $finish`), and writes `tb_good_mux.vcd`. The presence of the `.vcd` file in the directory confirms a successful run.
 
 **GTKWave Waveform - View 1:**
 
-![GTKWave Waveform - good_mux (full view)](./results/Good_mux_s1.png)
+![GTKWave Waveform - good_mux (full view)](<img width="1600" height="787" alt="good_mux_sim" src="https://github.com/user-attachments/assets/c59421c6-f8dd-4019-bc90-f60690715e70" />)
 
 This screenshot shows the complete 300 ns simulation window with all four signals - `sel`, `i0`, `i1`, and `y` - plotted. Key observations:
 
@@ -201,9 +197,6 @@ This screenshot shows the complete 300 ns simulation window with all four signal
 
 ### 1.3 Synthesis
 
-**Yosys Script and Terminal Output:**
-
-![Yosys synthesis - good_mux](./results/Good_mux_ys.png)
 
 The Yosys synthesis flow for `good_mux`:
 
@@ -223,7 +216,8 @@ The terminal output shows:
 - 
 **Logic (Block) Diagram:**
 
-![Block Diagram - good_mux after synthesis](./results/Good_mux_bd.png)
+![Block Diagram - good_mux after synthesis](<img width="1600" height="1200" alt="good_mux" src="https://github.com/user-attachments/assets/3a331804-0287-4447-bb2d-b8d67e8c84f1" />
+)
 
 `Yosys show` is used to visualize the synthesis schematic. It consists of:
 - 3 input pins (`i0`, `i1`, `sel`) connected to a single instance of the **`sky130_fd_sc_hd__mux2_1`** gate.
