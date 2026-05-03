@@ -1,10 +1,17 @@
-# VSD RTL Design & Synthesis Workshop
-### FPGA Internship Evaluation - 12-Hour Lab Assessment
+<h1 align="center">VSD Squadron — RTL Design & Synthesis Assessment</h1>
 
-> **Toolchain:** Icarus Verilog (Simulation) · GTKWave (Waveform Analysis) · Yosys (Synthesis) · SKY130 PDK (Standard Cell Library)
+<p align="center">
+  <b>12-Hour Hands-On Assessment: RTL Simulation, Logic Synthesis & Standard Cell Mapping<br/>using Icarus Verilog, GTKWave, Yosys & SkyWater 130nm PDK</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Assessment-12_Hour_Lab-critical?style=flat-square" alt="Assessment"/>
+  <img src="https://img.shields.io/badge/Tools-Icarus_Verilog_%7C_GTKWave_%7C_Yosys-2471A3?style=flat-square" alt="Tools"/>
+  <img src="https://img.shields.io/badge/PDK-SkyWater_130nm-F39C12?style=flat-square" alt="PDK"/>
+  <img src="https://img.shields.io/badge/Status-Completed-27AE60?style=flat-square" alt="Status"/>
+</p>
 
 ---
-
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
