@@ -17,7 +17,7 @@
 1. [Project Overview](#project-overview)
 2. [Tools Used](#Tools-Used)
 3. [Lab Environment & Toolchain Philosophy](#lab-environment--toolchain-philosophy)
-4. [Repository Structure](#repository-structure)
+4. [What This Repository Covers](#What-This-Repository-Covers)
 5. [File Index](#file-index)
 6. [2:1 Multiplexer (`good_mux`)](#lab-1--21-multiplexer-good_mux)
 7. [Multiple Modules: Hierarchy vs Flatten vs Submodule](#lab-2--multiple-modules-hierarchy-vs-flatten-vs-submodule)
@@ -105,64 +105,15 @@ The SkyWater SKY130 is a 130nm open-source Process Design Kit (PDK). It defines 
 Using a real PDK means the synthesized netlist reflects actual silicon area and timing, not an abstract gate-level model.
 
 ---
+## What This Repository Covers
 
-## Repository Structure
-
-```
-VSD RTL Design & Synthesis Workshop/
-│
-├── results/                        ← All screenshots referenced in this README
-│   ├── Good_mux_te.png
-│   ├── Good_mux_s1.png
-│   ├── Good_mux_s2.png
-│   ├── Good_mux_ys.png
-│   ├── Good_mux_bd.png
-│   ├── multiple_modules_te1.png
-│   ├── multiple_modules_te2.png
-│   ├── multiple_modules_ys.png
-│   ├── multiple_modules_bd.png
-│   ├── multiple_modules_fla_te.png
-│   ├── multiple_modules_fla_ys.png
-│   ├── multiple_modules_fla_bd.png
-│   ├── multiple_modules_sub_te.png
-│   ├── multiple_modules_sub_ys.png
-│   ├── multiple_modules_sub_bd.png
-│   ├── async_res_te.png
-│   ├── async_res_s1.png
-│   ├── async_res_s2.png
-│   ├── async_res_ys.png
-│   ├── async_res_bd.png
-│   ├── async_set_te.png
-│   ├── async_set_s1.png
-│   ├── async_set_s2.png
-│   ├── async_set_ys.png
-│   ├── async_set_bd.png
-│   ├── sync_res_te.png
-│   ├── sync_res_s1.png
-│   ├── sync_res_s2.png
-│   ├── sync_res_ys.png
-│   ├── sync_res_bd.png
-│   ├── mul2_te.png
-│   ├── mul2_ys.png
-│   ├── mul2_bd.png
-│   ├── mul8_te.png
-│   ├── mul8_ys.png
-│   └── mul8_bd.png
-│
-├── good_mux.v
-├── tb_good_mux.v
-├── multiple_modules.v
-├── tb_multiple_modules.v
-├── dff_asyncres.v
-├── tb_dff_asyncres.v
-├── dff_async_set.v
-├── tb_dff_async_set.v
-├── dff_syncres.v
-├── tb_dff_syncres.v
-├── mult_2.v
-├── mult_8.v
-└── README.md
-```
+- Writing RTL in Verilog
+- Creating and understanding testbenches
+- Simulation using Icarus Verilog
+- Waveform analysis using GTKWave
+- Synthesis using Yosys
+- Technology mapping using SKY130 standard cell libraries
+- Flip-flop coding styles and their impact
 
 ---
 
