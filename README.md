@@ -187,7 +187,8 @@ The terminal confirms the two-step simulation workflow:
 
 **GTKWave Waveform - View 1:**
 
-![GTKWave Waveform - good_mux (full view)](<img width="1600" height="787" alt="good_mux_sim" src="https://github.com/user-attachments/assets/c59421c6-f8dd-4019-bc90-f60690715e70" />)
+<img width="1600" height="787" alt="good_mux_sim" src="https://github.com/user-attachments/assets/edbc7d6b-d75d-444f-a129-7a250298f35e" />
+
 
 This screenshot shows the complete 300 ns simulation window with all four signals - `sel`, `i0`, `i1`, and `y` - plotted. Key observations:
 
