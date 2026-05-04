@@ -187,7 +187,8 @@ The terminal confirms the two-step simulation workflow:
 
 **GTKWave Waveform - View 1:**
 
-<img width="1600" height="787" alt="good_mux_sim" src="https://github.com/user-attachments/assets/edbc7d6b-d75d-444f-a129-7a250298f35e" />
+<img width="1600" height="986" alt="good_mux_sim" src="https://github.com/user-attachments/assets/174176b4-668c-45df-a026-0c312007ce99" />
+
 
 
 This screenshot shows the complete 300 ns simulation window with all four signals - `sel`, `i0`, `i1`, and `y` - plotted. Key observations:
@@ -217,7 +218,8 @@ The terminal output shows:
 - 
 **Logic (Block) Diagram:**
 
-<img width="1600" height="1200" alt="good_mux" src="https://github.com/user-attachments/assets/3a331804-0287-4447-bb2d-b8d67e8c84f1" />
+<img width="1600" height="857" alt="good_mux" src="https://github.com/user-attachments/assets/7dfce685-b40d-4fab-874e-2468d30c92b5" />
+
 
 
 `Yosys show` is used to visualize the synthesis schematic. It consists of:
@@ -310,7 +312,8 @@ As can be seen from the output from the terminal, Yosys performs synthesis on th
 
 **Block Diagram - Hierarchical:**
 
-<img width="1551" height="696" alt="multimodules" src="https://github.com/user-attachments/assets/5ff649f1-3ac6-449f-81a7-b17c046cca5f" />
+<img width="1600" height="1200" alt="multimodules" src="https://github.com/user-attachments/assets/ba47e454-018e-4c43-aae6-f5b5edf31c52" />
+
 
 
 As seen from the hierarchical block diagram, there are:
@@ -345,7 +348,8 @@ write_verilog -noattr multiple_modules_flat.v
 
 **Block Diagram - Flattened:**
 
-<img width="1600" height="1200" alt="multimodules_flatten" src="https://github.com/user-attachments/assets/ec34efb8-2daa-4bac-bcfd-7242b8c86425" />
+<img width="1600" height="742" alt="multimodules_flatten" src="https://github.com/user-attachments/assets/390893d5-08fc-4d65-ac6d-c7dd1eef5250" />
+
 
 
 The flat block diagram is clearly a **striking difference** compared to the hierarchical block diagram:
@@ -462,7 +466,8 @@ The long reset period (547 ns) ensures we see multiple clock cycles both inside 
 
 **GTKWave Waveform - View 1:**
 
-<img width="1581" height="845" alt="dff_asyncres_sim" src="https://github.com/user-attachments/assets/4ff144bc-e90e-473b-a1d6-f0c1c63b0108" />
+<img width="1600" height="841" alt="dff_asyncres_sim" src="https://github.com/user-attachments/assets/24e6ea93-983c-4f01-b923-aa63a288319f" />
+
 
 
 The waveform shows the full 3000 ns simulation. Key observations:
@@ -471,7 +476,8 @@ The waveform shows the full 3000 ns simulation. Key observations:
 
 **GTKWave Waveform - View 2 (Zoomed - Reset Assertion):**
 
-<img width="1534" height="796" alt="dff_asyncres_sim2" src="https://github.com/user-attachments/assets/65fa6dec-e20e-4b48-a7b6-e0b5c8214d01" />
+<img width="1600" height="882" alt="dff_asyncres_sim2" src="https://github.com/user-attachments/assets/597a0bf2-5fa2-46c7-a841-7a60f01fa5cf" />
+
 
 
 The zoomed view is the crucial piece of evidence. Here, the precise time that `async_reset` becomes `1` is seen. The cursor marks the point at which `q` switches from `1` to `0`, perfectly in sync with the rising edge of the `async_reset` signal, without any reliance on the `clk` edge timing.
@@ -480,7 +486,8 @@ The zoomed view is the crucial piece of evidence. Here, the precise time that `a
 
 **Block Diagram:**
 
-<img width="1600" height="849" alt="dff_asyncres" src="https://github.com/user-attachments/assets/24399300-49cc-43d6-88c1-4d2e28d8d9b9" />
+<img width="1600" height="884" alt="dff_asyncres" src="https://github.com/user-attachments/assets/e0d35482-3d6c-49fd-9932-b810dec2ae5a" />
+
 
 
 This is implemented using a **`sky130_fd_sc_hd__dfrtp_1`** cell, which is a D Flip-Flop having **Asynchronous Active-High Reset** (`r`=reset, `t`=true/active-high). The block diagram depicts the following:
@@ -520,7 +527,8 @@ The importance of this lies on how the reset works: resets provide a certain LOW
 
 **GTKWave Waveform - View 1:**
 
-<img width="1596" height="728" alt="dff_async_set_sim" src="https://github.com/user-attachments/assets/3167948f-46e2-4297-9c40-7e5540f3ab1c" />
+
+<img width="1600" height="951" alt="dff_async_set_sim" src="https://github.com/user-attachments/assets/c421acf0-7f1f-4188-901b-974daaf1fbd7" />
 
 
 
@@ -530,7 +538,8 @@ The zoomed waveform now shows that when `async_set` goes high, `q` immediately *
 
 **Block Diagram:**
 
-<img width="1600" height="727" alt="dff_async_set" src="https://github.com/user-attachments/assets/ecdf3a86-d98f-41bb-b9e3-447bc152f514" />
+<img width="1600" height="981" alt="dff_async_set" src="https://github.com/user-attachments/assets/3471e8bb-2638-4562-a7df-a1f1e96dbb9d" />
+
 
 
 The cell created by Yosys is a **`sky130_fd_sc_hd__dfstp_1`**, which is basically a D Flip-Flop having **an asynchronous active-high Set** feature. In the suffix `dfstp`, the letter `s` means set. The structure of this block diagram is similar to the one with reset, except for the control pin, which becomes `SET_B` (active-low set, using an inverter from active-high `async_set`).
@@ -563,12 +572,14 @@ endmodule
 
 **GTKWave Waveform - View 1:**
 
-<img width="1589" height="761" alt="dff_syncres_sim" src="https://github.com/user-attachments/assets/2d23b981-a5f2-4ecc-a08f-c5babb425eeb" />
+<img width="1600" height="808" alt="dff_syncres_sim" src="https://github.com/user-attachments/assets/a97cbf8a-3a04-498c-b166-945f9af5db9d" />
+
 
 
 **GTKWave Waveform - View 2 (Zoomed - Reset Assertion):**
 
-<img width="1577" height="709" alt="dff_syncres_sim2" src="https://github.com/user-attachments/assets/8d991d7b-5c55-4f1b-af14-c1460622f751" />
+<img width="1600" height="827" alt="dff_syncres_sim2" src="https://github.com/user-attachments/assets/ebc8b917-2fa5-4403-8ac4-3b4424268a80" />
+
 
 
 Zoomed waveform is the final piece of evidence that confirms that the operation is synchronous in nature. Observe that the value of `q` is not set to zero immediately when the signal `sync_reset` becomes true. Rather, it takes the next clock rise edge to change its value to zero.
@@ -576,7 +587,8 @@ Zoomed waveform is the final piece of evidence that confirms that the operation 
 
 **Block Diagram:**
 
-<img width="1600" height="740" alt="dff_syncres" src="https://github.com/user-attachments/assets/1476a422-dc27-4f66-a1fa-b6df8369871a" />
+<img width="1600" height="904" alt="dff_syncres" src="https://github.com/user-attachments/assets/7215678a-1f07-42c4-97ae-72d7a59fb9df" />
+
 
 
 This block diagram shows a **totally different synthesis outcome** from the asynchronous counterparts:
@@ -634,9 +646,6 @@ The terminal confirms the expected result: `Number of cells: 0`. Yosys reports t
 
 
 
-**Block Diagram:**
-
-<img width="1600" height="749" alt="mul2" src="https://github.com/user-attachments/assets/04f34599-8691-4cc1-ab13-4ee6ce268728" />
 
 
 The block diagram shows only input and output ports with direct wire connections - no cells, no gates. The 3-bit input `a[2:0]` maps to output `y[3:1]`, and `y[0]` is tied to constant `1'b0`. This is pure **wire-level optimization**.
@@ -678,9 +687,7 @@ The multiplication result is the 3-bit input `a` **repeated twice** to form a 6-
 The terminal confirms `Number of cells: 0`. Yosys recognized the `a * 9` as `{a, a}` and implemented it with zero gates.
 
 
-**Block Diagram:**
 
-<img width="1600" height="984" alt="mul8" src="https://github.com/user-attachments/assets/fc7032a1-df67-493f-ab1f-17ede9010b08" />
 
 
 As depicted by the block diagram above, `a[2:0]` is directly connected to `y[5:3]` and `y[2:0]`, meaning that the 3-bit input signal is replicated twice to generate the 6-bit output. This clearly illustrates the fact that the synthesis process is capable of performing **constant folding and algebraic reduction** much more effectively than expected.
