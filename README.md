@@ -217,20 +217,15 @@ The terminal output shows:
 - 
 **Logic (Block) Diagram:**
 
-![Block Diagram - good_mux after synthesis](<img width="1600" height="1200" alt="good_mux" src="https://github.com/user-attachments/assets/3a331804-0287-4447-bb2d-b8d67e8c84f1" />
-)
+<img width="1600" height="1200" alt="good_mux" src="https://github.com/user-attachments/assets/3a331804-0287-4447-bb2d-b8d67e8c84f1" />
+
 
 `Yosys show` is used to visualize the synthesis schematic. It consists of:
 - 3 input pins (`i0`, `i1`, `sel`) connected to a single instance of the **`sky130_fd_sc_hd__mux2_1`** gate.
 - Only one output pin `y` driven by the output pin of MUX.
 - There is no FF, buffer, nor inverter in this circuit, meaning a perfect combinational design.
 
-As a result, we can be sure that the `always @(*) if-else` block was interpreted as a multiplexer (and not a latch).
-**GTKWave Waveform - View 2 (Zoomed):**
 
-![GTKWave Waveform - good_mux (after yosys)](./results/Good_mux_s2.png)
-
-As we zoom into the figure, we will see how the zero propagation delay works in the boundary when there is a change in `sel`. Right at the instant that `sel` changes from 0 to 1, there is a switch in the output signal `y`, from `i0` to `i1`. This is proof that the entire sensitivity list (`@(*)`) works perfectly fine; otherwise, there would be a delay in `y`. Hence we can say we got the same waveform as the previous.
 
 ---
 ## Module 2 - Timing libs, hierarchical vs flat synthesis and efficient flop coding styles
@@ -299,11 +294,6 @@ The three inputs are driven at prime-like periods, ensuring all 8 combinations o
 
 In hierarchical synthesis, Yosys **preserves the module boundaries**. Each sub-module is synthesized as a separate entity, and the top-level netlist instantiates those synthesized sub-modules.
 
-**Terminal Output:**
-
-![Terminal - multiple_modules hierarchical](./results/multiple_modules_te1.png)
-![Terminal - multiple_modules hierarchical (continued)](./results/multiple_modules_te2.png)
-
 The Yosys script for hierarchical synthesis:
 
 ```tcl
@@ -316,13 +306,12 @@ write_verilog -noattr multiple_modules_hier.v
 
 As can be seen from the output from the terminal, Yosys performs synthesis on the sub-modules separately first, and then performs the synthesis on the top module with the sub-modules treated as black boxes.
 
-**Yosys Output:**
 
-![Yosys - multiple_modules hierarchical synthesis](./results/multiple_modules_ys.png)
 
 **Block Diagram - Hierarchical:**
 
-![Block Diagram - multiple_modules (hierarchical)](./results/multiple_modules_bd.png)
+<img width="1551" height="696" alt="multimodules" src="https://github.com/user-attachments/assets/5ff649f1-3ac6-449f-81a7-b17c046cca5f" />
+
 
 As seen from the hierarchical block diagram, there are:
 - Two sub-module boxes (`u1` and `u2`) with module names clearly specified.
@@ -342,10 +331,6 @@ As seen from the hierarchical block diagram, there are:
 
 In flattened synthesis, the `flatten` command is applied **after** synthesis. This merges all module hierarchies into a single, flat netlist - all module boundaries are dissolved, and only primitive cells remain.
 
-**Terminal Output:**
-
-![Terminal - multiple_modules flattened](./results/multiple_modules_fla_te.png)
-
 The Yosys script for flattened synthesis:
 
 ```tcl
@@ -357,13 +342,11 @@ show
 write_verilog -noattr multiple_modules_flat.v
 ```
 
-**Yosys Output:**
-
-![Yosys - multiple_modules flattened synthesis](./results/multiple_modules_fla_ys.png)
 
 **Block Diagram - Flattened:**
 
-![Block Diagram - multiple_modules (flattened)](./results/multiple_modules_fla_bd.png)
+<img width="1600" height="1200" alt="multimodules_flatten" src="https://github.com/user-attachments/assets/ec34efb8-2daa-4bac-bcfd-7242b8c86425" />
+
 
 The flat block diagram is clearly a **striking difference** compared to the hierarchical block diagram:
 - No boxes for the **sub-module blocks** exist; the module divisions have been completely removed.
@@ -392,9 +375,6 @@ The flat block diagram is clearly a **striking difference** compared to the hier
 
 In this strategy, Yosys synthesizes **only a single sub-module** from the file, even though the top-level module exists. This is done by specifying a sub-module as the synthesis top (`-top sub_module1`).
 
-**Terminal Output:**
-
-![Terminal - multiple_modules submodule synthesis](./results/multiple_modules_sub_te.png)
 
 The Yosys script for submodule synthesis:
 
@@ -406,13 +386,7 @@ show
 write_verilog -noattr sub_module1_netlist.v
 ```
 
-**Yosys Output:**
 
-![Yosys - sub_module1 synthesis](./results/multiple_modules_sub_ys.png)
-
-**Block Diagram - Submodule:**
-
-![Block Diagram - sub_module1 only](./results/multiple_modules_sub_bd.png)
 
 The submodule block diagram shows **only** `sub_module1` (the AND gate). The OR gate (`sub_module2`) and the top-level interconnect are completely absent from this synthesis run. The diagram shows:
 - Two inputs: `a` and `b`.
@@ -485,13 +459,11 @@ always #547 async_reset = ~async_reset; // long reset pulses
 
 The long reset period (547 ns) ensures we see multiple clock cycles both inside and outside the reset window.
 
-**Terminal Output:**
-
-![Terminal - dff_asyncres simulation](./results/async_res_te.png)
 
 **GTKWave Waveform - View 1:**
 
-![GTKWave - dff_asyncres (full window)](./results/async_res_s1.png)
+<img width="1581" height="845" alt="dff_asyncres_sim" src="https://github.com/user-attachments/assets/4ff144bc-e90e-473b-a1d6-f0c1c63b0108" />
+
 
 The waveform shows the full 3000 ns simulation. Key observations:
 - `q` follows `d` on each rising edge of `clk` when `async_reset = 0`.
@@ -499,17 +471,17 @@ The waveform shows the full 3000 ns simulation. Key observations:
 
 **GTKWave Waveform - View 2 (Zoomed - Reset Assertion):**
 
-![GTKWave - dff_asyncres (zoomed)](./results/async_res_s2.png)
+<img width="1534" height="796" alt="dff_asyncres_sim2" src="https://github.com/user-attachments/assets/65fa6dec-e20e-4b48-a7b6-e0b5c8214d01" />
+
 
 The zoomed view is the crucial piece of evidence. Here, the precise time that `async_reset` becomes `1` is seen. The cursor marks the point at which `q` switches from `1` to `0`, perfectly in sync with the rising edge of the `async_reset` signal, without any reliance on the `clk` edge timing.
 
-**Yosys Synthesis Output:**
 
-![Yosys - dff_asyncres synthesis](./results/async_res_ys.png)
 
 **Block Diagram:**
 
-![Block Diagram - dff_asyncres](./results/async_res_bd.png)
+<img width="1600" height="849" alt="dff_asyncres" src="https://github.com/user-attachments/assets/24399300-49cc-43d6-88c1-4d2e28d8d9b9" />
+
 
 This is implemented using a **`sky130_fd_sc_hd__dfrtp_1`** cell, which is a D Flip-Flop having **Asynchronous Active-High Reset** (`r`=reset, `t`=true/active-high). The block diagram depicts the following:
 - `D` connected to input `d`
@@ -544,27 +516,22 @@ This module has an exact structural equivalence with `dff_asyncres` except for t
 
 The importance of this lies on how the reset works: resets provide a certain LOW level (typical when initializing counters and FSM states), whereas a set will provide a certain HIGH level (priority and active low signals, typically).
 
-**Terminal Output:**
 
-![Terminal - dff_async_set simulation](./results/async_set_te.png)
 
 **GTKWave Waveform - View 1:**
 
-![GTKWave - dff_async_set (full window)](./results/async_set_s1.png)
+<img width="1596" height="728" alt="dff_async_set_sim" src="https://github.com/user-attachments/assets/3167948f-46e2-4297-9c40-7e5540f3ab1c" />
 
-**GTKWave Waveform - View 2 (Zoomed - Set Assertion):**
 
-![GTKWave - dff_async_set (zoomed)](./results/async_set_s2.png)
 
 The zoomed waveform now shows that when `async_set` goes high, `q` immediately **rises to 1** (not falls to 0 as in the reset case). Again, this transition is independent of the clock - it occurs at the exact `async_set` edge, proving asynchronous behaviour.
 
-**Yosys Synthesis Output:**
 
-![Yosys - dff_async_set synthesis](./results/async_set_ys.png)
 
 **Block Diagram:**
 
-![Block Diagram - dff_async_set](./results/async_set_bd.png)
+<img width="1600" height="727" alt="dff_async_set" src="https://github.com/user-attachments/assets/ecdf3a86-d98f-41bb-b9e3-447bc152f514" />
+
 
 The cell created by Yosys is a **`sky130_fd_sc_hd__dfstp_1`**, which is basically a D Flip-Flop having **an asynchronous active-high Set** feature. In the suffix `dfstp`, the letter `s` means set. The structure of this block diagram is similar to the one with reset, except for the control pin, which becomes `SET_B` (active-low set, using an inverter from active-high `async_set`).
 
@@ -593,27 +560,24 @@ endmodule
 
 > **Important Note:** While the port declaration contains `async_reset`, the internal structure realizes **synchronous** reset since it is specified within `always @(posedge clk)` but not in the sensitivity list. In practice, the testbench properly applies `sync_reset` (rather than `async_reset`).
 
-**Terminal Output:**
-
-![Terminal - dff_syncres simulation](./results/sync_res_te.png)
 
 **GTKWave Waveform - View 1:**
 
-![GTKWave - dff_syncres (full window)](./results/sync_res_s1.png)
+<img width="1589" height="761" alt="dff_syncres_sim" src="https://github.com/user-attachments/assets/2d23b981-a5f2-4ecc-a08f-c5babb425eeb" />
+
 
 **GTKWave Waveform - View 2 (Zoomed - Reset Assertion):**
 
-![GTKWave - dff_syncres (zoomed)](./results/sync_res_s2.png)
+<img width="1577" height="709" alt="dff_syncres_sim2" src="https://github.com/user-attachments/assets/8d991d7b-5c55-4f1b-af14-c1460622f751" />
+
 
 Zoomed waveform is the final piece of evidence that confirms that the operation is synchronous in nature. Observe that the value of `q` is not set to zero immediately when the signal `sync_reset` becomes true. Rather, it takes the next clock rise edge to change its value to zero.
 
-**Yosys Synthesis Output:**
-
-![Yosys - dff_syncres synthesis](./results/sync_res_ys.png)
 
 **Block Diagram:**
 
-![Block Diagram - dff_syncres](./results/sync_res_bd.png)
+<img width="1600" height="740" alt="dff_syncres" src="https://github.com/user-attachments/assets/1476a422-dc27-4f66-a1fa-b6df8369871a" />
+
 
 This block diagram shows a **totally different synthesis outcome** from the asynchronous counterparts:
 - Yosys employs a **simple DFF** (`sky130_fd_sc_hd__dfxtp_1`), with no dedicated reset pin.
@@ -665,19 +629,15 @@ Then a * 2 = {a[2], a[1], a[0], 0}
 
 The output `y` is simply `a` with a zero appended at the LSB. This requires **only wire connections** - no logic cells whatsoever.
 
-**Terminal Output:**
-
-![Terminal - mul2 synthesis](./results/mul2_te.png)
 
 The terminal confirms the expected result: `Number of cells: 0`. Yosys reports that after all optimization passes, there is literally **nothing to synthesize** - the entire "multiplier" is just a set of wires.
 
-**Yosys Output:**
 
-![Yosys - mul2 synthesis](./results/mul2_ys.png)
 
 **Block Diagram:**
 
-![Block Diagram - mul2](./results/mul2_bd.png)
+<img width="1600" height="749" alt="mul2" src="https://github.com/user-attachments/assets/04f34599-8691-4cc1-ab13-4ee6ce268728" />
+
 
 The block diagram shows only input and output ports with direct wire connections - no cells, no gates. The 3-bit input `a[2:0]` maps to output `y[3:1]`, and `y[0]` is tied to constant `1'b0`. This is pure **wire-level optimization**.
 
@@ -714,19 +674,14 @@ But since a is 3 bits:
 
 The multiplication result is the 3-bit input `a` **repeated twice** to form a 6-bit output. Once again, **no arithmetic logic is required** - only wire routing.
 
-**Terminal Output:**
-
-![Terminal - mult8 synthesis](./results/mul8_te.png)
 
 The terminal confirms `Number of cells: 0`. Yosys recognized the `a * 9` as `{a, a}` and implemented it with zero gates.
 
-**Yosys Output:**
-
-![Yosys - mult8 synthesis](./results/mul8_ys.png)
 
 **Block Diagram:**
 
-![Block Diagram - mult8](./results/mul8_bd.png)
+<img width="1600" height="984" alt="mul8" src="https://github.com/user-attachments/assets/fc7032a1-df67-493f-ab1f-17ede9010b08" />
+
 
 As depicted by the block diagram above, `a[2:0]` is directly connected to `y[5:3]` and `y[2:0]`, meaning that the 3-bit input signal is replicated twice to generate the 6-bit output. This clearly illustrates the fact that the synthesis process is capable of performing **constant folding and algebraic reduction** much more effectively than expected.
 
